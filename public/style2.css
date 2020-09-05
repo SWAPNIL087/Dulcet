@@ -3,9 +3,13 @@
 	padding:0px;
 	box-sizing: border-box;
 }
-
+#admin{
+	position: relative;
+	 
+	top:8px;
+}
 .navbar-nav > li{
-	padding: 5px;
+	padding: 3px;
 	font-size: 20px;
 	color: white;
 	font-weight: bold;
@@ -37,7 +41,7 @@
 	border-radius: 50px;
 }
 .navbar-nav{
-	margin-left: 100px;
+	margin-left: 40px;
 }
 #lines{
 	padding-bottom: 0;
@@ -137,6 +141,7 @@ span:hover{
 
 }
 @media(max-width: 991px)and (min-width:768px ){
+
 	#cc1{
 	 	text-align: center;
 	 	margin:auto;
@@ -147,6 +152,10 @@ span:hover{
 	
 }
 @media(max-width: 767px){
+	#admin{
+	margin-left:0%;
+	margin-top: -40%;
+}
 	.sh{
 		display: none !important;
 	}
@@ -199,9 +208,9 @@ font-size: 20px;
 	text-align: center;	
 }
 
-.hidenseek{
+/*.hidenseek{
 	display: none;
-}
+}*/
 .add-cart{
 	position: absolute;
 	width: 100%;
@@ -212,15 +221,17 @@ font-size: 20px;
 	text-align: center;	
 }
 
-.image:hover .hidenseek{
+/*.image:hover .hidenseek{
 	display: block;
 
 }
-.image:hover .cart1,
+*//*.image:hover .cart1,
 .image:hover .cart2,
 .image:hover .cart3,
 .image:hover .cart4,
-.image:hover .cart5{
+.image:hover .cart5,
+.image:hover .cart6,*/
+.image:hover .add-cart{
 	bottom: 90px;
 	opacity:.7;
 	padding: 10px;
@@ -255,7 +266,7 @@ a{
 	max-width: 850px;
 	display: flex;
 	justify-content: flex-start;
-	border-bottom : 4px solid lightgrey;
+	/*border-bottom : 4px solid lightgrey;*/
 	margin: 0 auto;
 
 }
@@ -298,13 +309,53 @@ a{
 	justify-content: flex-end;
 	width: 100%;
 	padding:10px 0;
+
 }
 .trash:hover{
-	color:red;
+	color:red!important;
 	transform: scale(1.5);
 }
 .increase:hover,
 .decrease:hover{
 	color: green;
 	transform: scale(1.5);
+}
+#admin:hover{
+	text-decoration: none !important;
+
+}
+#navbarSupportedContent{
+	border-radius: 20px;
+}
+#box1{
+	text-align: center;
+	margin: auto;
+	min-width: 40%;
+	padding-left: 20px;
+	float: left;
+	padding-top: 10px;
+}
+#box2{
+	position: fixed;
+	border-radius: 25px;
+	text-align: center;
+	margin-top: 2%;
+	margin-left: 50%;
+
+	min-width: 40%;
+	padding: 10px;
+	float: left;
+	border:3px solid black;
+
+
+}
+#lastbtn{
+	background-color: 	#33CC99;
+	color: white;
+	border-radius: 15px;
+}
+#lastbtn:hover{
+	background-color: #F98D8D;
+	color: black
+
 }

@@ -162,6 +162,8 @@
 
           </div>
       </li>
+      <li><span style="color: white;font-weight: bold;"><a href="/admin" style="text-decoration: none;"><span id="admin">{{key}}</span></a></span></li>
+
              
     </ul> 
   </div>
@@ -311,11 +313,21 @@ for (let i=0;i<carts.length; i++){
     console.log("Check")
   })
 }
-
-/*var clear = document.getElementById('clear');
-clear.addEventListener('click',function(){
-  localStorage.clear();
-})*/
+fetch('data.json').then(response => {
+          //console.log(response);
+          return response.json();
+        }).then(data => {
+          // Work with JSON data here
+          products= data;
+          JSON.stringify(products)
+          console.log(products)
+          for(var i =0 ;i<products.length;i++){
+            localStorage.setItem(products[i].name, JSON.stringify(products[i]))
+          }
+        }).catch(err => {
+          // Do something for an error here
+          console.log("Error Reading data " + err);
+        });
 </script>
 
 </body>
