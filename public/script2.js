@@ -1,12 +1,3 @@
-//to prevent reloadinng of the page
-/*var links = $('a');
-links.click(function(e) {
-    e.preventDefault(); //to prevent reloading of the page//
-});*/
-
-/*var one = 1;
-document.cookie="cartnumbers ="+one;*/
-
 let carts = document.querySelectorAll('.add-cart');
 let products = [
 {
@@ -265,8 +256,3 @@ function manageQuantity(){
 
 onLoadCartNumbers();
 displayCart();
-
-
-
-
-

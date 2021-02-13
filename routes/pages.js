@@ -121,7 +121,48 @@ router.get('/register',function(req,res){
 })
 
 router.get('/checkout',function(req,res){
-	res.render('checkout',{total:"bhag be"})
+	//add here the total from database and send it to the client side
+	db.query("SELECT * FROM "+username+"",async (error,result) => {
+		if(error) {
+			console.log(error);
+		}
+		else{
+			db.query("SELECT SUM(carttotal) AS overall FROM "+username+"",async(err,result2)=>{
+			result.stringify = JSON.stringify(result);
+			//var string = JSON.stringify(result2);
+			console.log(result2)
+			console.log(result2[0].overall,"///////////////////////////////////////////////////")
+			//console.log(result.stringify)
+			//console.log(string)
+			
+		db.query("SELECT * FROM "+username+"",async (error,resultf) => {
+					if(error){
+						console.log(error)
+					}
+					else{
+						console.log(resultf,"finall")
+						db.query("SELECT SUM(cartnumber) AS uwish FROM "+username+"",async(err,re)=>{
+				if(err){
+					console.log(err)
+
+				}
+				else{
+					console.log(re)
+					
+					uwish=(parseInt(re[0].uwish))
+				}
+			})
+				setTimeout(function() {
+				res.render('checkout',{cartno:uwish,result:resultf,all:result2});
+			}, 10);
+					}
+				})	
+
+			
+		})
+		}
+	})
+	
 	
 })
 router.get('/login',function(req,res){
@@ -232,16 +273,33 @@ const checksum_lib = require('../checksum')
 const port=3030
 var arr=[]
 var thefinalcartnumber = 0;
+
 router.post('/anyurl',function(req,res){
+		//console.log('??????????????????????????????????????????????????????????')
 		arr=[]
 		const{key} = req.body
 		arr.push(key);
-		console.log(arr)})
+		console.log(arr,"right here!!!!")   })
 		router.post('/payments',function(req,res){
-			console.log(arr)
+			//console.log(arr)
 			//console.log(req.body)
 			const{name,email,mobile,address}=req.body
-			array ='customer_name : '+name+'address : '+address+'mobile_number : '+mobile			
+			console.log("what is undefined tell me")
+			array ='customer_name : '+name+'address : '+address+'mobile_number : '+mobile	
+			var realkey=""
+		db.query("SELECT * FROM "+username+"",async (error,result) => {
+		if(error) {
+			console.log(error);
+		}
+		else{
+			db.query("SELECT SUM(carttotal) AS overall FROM "+username+"",async(err,result2)=>{
+			result.stringify = JSON.stringify(result);
+			//var string = JSON.stringify(result2);
+			console.log(result2)
+			console.log(result2[0].overall,"????????????????????????????????????????")	
+			realkey=result2[0].overall
+		  
+	
 	router.get('/payment',function(req,res){
 			let params ={}
 			params['MID'] 					= 'UlBnlB76012052438176';
@@ -250,7 +308,7 @@ router.post('/anyurl',function(req,res){
 			params['INDUSTRY_TYPE_ID']		= 'Retail';
 			params['ORDER_ID']				= 'TEST_'  + new Date().getTime();
 			params['CUST_ID'] 				= 'Customer001';
-			params['TXN_AMOUNT']			= arr[0];
+			params['TXN_AMOUNT']			= realkey +'00';
 			params['CALLBACK_URL']			= 'http://localhost:'+port+'/callback';
 			params['EMAIL']					= email;
 			params['MOBILE_NO']				= mobile;
@@ -268,7 +326,7 @@ router.post('/anyurl',function(req,res){
 				res.write(html)
 				res.end;
 			})
-		})
+		})}) }  })
 	console.log(arr)
 	let mailDetails = { 
     from: 'swapniltiwari087@gmail.com', 
