@@ -7,12 +7,11 @@ const path = require('path');
 dotenv.config({path: './.env'});
 
 const db = mysql.createConnection({
-	host: process.env.d_h,
-	user: process.env.d_u,
-	password: process.env.d_p,
-	database: process.env.d
+	host: 'localhost',
+	user: 'root',
+	password: 'gta@fck/100',
+	database: 'database',
 })
-
 
 
 const publicDirectory = path.join(__dirname,'./public')
@@ -35,4 +34,6 @@ app.use('/',require('./routes/pages'))
 
 /*app.use('/auth',require('./routes/server'))*/
 
-app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});

@@ -35,7 +35,7 @@ function send_data(){
 	var password = document.getElementById("password").value;
 
 	var httpr = new XMLHttpRequest();
-	httpr.open("POST","../",true);
+	httpr.open("POST","../index",true);
 	httpr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	 httpr.onreadystatechange = function(){
 	 if(httpr.readyState==4 && httpr.status==200){

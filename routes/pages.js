@@ -170,7 +170,7 @@ router.get('/login',function(req,res){
 })
 var aut  = false;
 var username = ""
-router.post('/',function(req,res){
+router.post('/index',function(req,res){
 	console.log(req.body);
 	const {name,password} = req.body;
 	console.log(name);
