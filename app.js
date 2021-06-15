@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
-const dotenv = require('dotenv');
 const path = require('path');
 
 
@@ -34,6 +33,6 @@ app.use('/',require('./routes/pages'))
 
 /*app.use('/auth',require('./routes/server'))*/
 
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
-});
+var PORT = process.env.PORT || 3000;
+app.listen(PORT);
+console.log("listening now");
