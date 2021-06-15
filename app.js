@@ -35,4 +35,4 @@ app.use('/',require('./routes/pages'))
 
 /*app.use('/auth',require('./routes/server'))*/
 
-app.listen(process.env.PORT|3000)
+app.listen(process.env.PORT || 3000)
