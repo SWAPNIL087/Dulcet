@@ -52,7 +52,7 @@ let fs = require('fs')
 	
 	
 	/*console.log(file);*/
-	res.redirect('/index')
+	res.redirect('/')
 
 })
 router.get('/home',function(req,res){
@@ -113,7 +113,7 @@ router.get('/cart',function(req,res){
 	})
 			})
 /*uptill here delete*/
-router.get('/index',function(req,res){
+router.get('/',function(req,res){
 	res.render('index')
 })
 router.get('/register',function(req,res){
@@ -205,7 +205,7 @@ router.post('/',function(req,res){
 
 })
 
-router.post('/index',function(req,res){
+router.post('/',function(req,res){
 	const{name} = req.body;
 	username = name;
 	cartnoarray = [];
