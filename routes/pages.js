@@ -12,11 +12,12 @@ let mailTransporter = nodemailer.createTransport({
     } 
 }); 
 const db = mysql.createConnection({
-	host: process.env.d_h,
-	user: process.env.d_u,
-	password: process.env.d_p,
-	database: process.env.d
-});
+	host: 'localhost',
+	user: 'root',
+	password: 'gta@fck/100',
+	database: 'database',
+})
+
 const router = express.Router();
 
 router.post('/grabit',function(req,res){
@@ -189,7 +190,7 @@ router.post('/index',function(req,res){
 				console.log(error);
 			}
 			else{
-								db.query("CREATE TABLE `database`."+ name +" (`productincart` VARCHAR(10000) NOT NULL , `cartnumber` INT(100) NOT NULL , `carttotal` INT(100) NOT NULL , `image` VARCHAR(10000) NOT NULL , `prize` TEXT(100000) NOT NULL) ENGINE = InnoDB;")
+				db.query("CREATE TABLE `database`."+ name +" (`productincart` VARCHAR(10000) NOT NULL , `cartnumber` INT(100) NOT NULL , `carttotal` INT(100) NOT NULL , `image` VARCHAR(10000) NOT NULL , `prize` TEXT(100000) NOT NULL) ENGINE = InnoDB;")
 				return res.send(
 
 			'<h3 style="color:#006622;background-color: #33ff77;border-radius:15px;"><center>Name registered!,Please Login To Continue.</center><h3>'
