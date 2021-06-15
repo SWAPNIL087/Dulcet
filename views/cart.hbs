@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style2.css">
+<body>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a style="color: white" class="navbar-brand" href="#">Shopping Bag</a>
+		<div class="ml-auto">
+			<a href="/home" style="text-decoration-line: none;"><span>BACK TO SHOPPING!</span></a>
+		</div>
+
+		<div class="text-center ml-auto">
+        <ul class="list-unstyled" id="check">
+          
+          <li style="margin-top: 10px;padding-left: 10px;font-size: 18px;font-weight: bold" class="cart">
+            <!-- <button class="btn btn-primary" > --><a style="color:white;" href="/cart">
+            	<i class="fa fa-shopping-cart" ></i>&nbsp<span>{{cartno}}</span>
+            </a><!-- </button> -->
+          </li>
+      
+        </ul>
+    </div>
+	</nav>
+	<div id="detailspage">
+		
+	</div>
+
+	<div class="products-container col-12 col-md-8 col-sm-8">
+		<div class="product-header">
+			<h5 class="product-title">PRODUCT</h5>
+			<h5 class="price">PRICE</h5>
+			<h5 class="quantity">QUANTITY</h5>
+			<h5 class="total"> TOTAL</h5>
+		</div>
+		<!-- {{{result.stringify}}} --><!-- do this if u want to display it not as [object][object] -->
+		
+
+		
+		<div class="products" >
+			
+			{{#if result}}
+
+			{{#result}}
+
+			<div class="cp" style="display:flex;">
+			<div class="product-title">
+
+				<div><i class="trash fa fa-trash-o" style="font-size:36px"></i>
+					
+				<img height="80px",width="80px" src="{{image}}"  id="imageload"></div>
+
+				<br>
+				<span class="selector">{{productincart}}</span>
+				<hr>
+				</div>
+				<div name="check" class="price">rs/{{prize}}00.00</div>
+				<div name="check" class = "quantity">
+				<i class="fa fa-arrow-circle-left decrease" style="font-size:36px"></i><span>{{cartnumber}}</span>
+				&nbsp &nbsp<i class="increase fa fa-arrow-circle-right " style="font-size:36px"></i>
+				</div>
+				<div name="check" class="total">
+				<h6 class="total">rs{{carttotal}}00.00/-</h6>
+				</div>
+			</div>
+
+			{{/result}}
+			{{/if}}
+		</div>
+
+<div>
+	<div class ="basketTotalConatiner">
+			<h4 class="BasketTotalTitle">
+				Cart Total- &nbsp
+			</h4>
+			{{#all}}
+			<h4 class="basketTotal">
+				rs <span class="amount">{{overall}}</span>00.00 /-
+			</h4>
+			{{/all}}
+		</div>
+</div>
+<!-- ----------------------------------------------------------------------------------------------------- -->
+	 <button class="btn btn-primary btn-lg btn-block checkoutbtn" id="btnn" type="button" style="background-color:green;" ><a 
+	 	href="/checkout" style="color: white;text-decoration-line: none;">CheckOut<!-- </a> --></button>
+	</div>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="scriptcheck.js"></script>
+<script type="text/javascript">
+//managing the delete button function;
+var deleteButtons = document.querySelectorAll('.products .trash');
+for (let i =0; i<deleteButtons.length; i++){
+	deleteButtons[i].addEventListener('click',function(){
+			productName = deleteButtons[i].parentElement.parentElement/*parentElement.querySelector('.selector')*/.textContent.trim().toUpperCase()/*.replace(/ /g,'')*/;
+			console.log(productName);
+			$.ajax({
+               type: "POST",
+               url: "/trash", 
+               data: {
+                  key: productName,
+               },
+               
+               dataType: 'json',
+               success: function(data) {
+                  //success condition code
+               },
+               error: function() {
+                  //error condition code
+               }     
+        });
+setTimeout(function() {
+		location.reload();
+	},200);
+		});
+	}
+
+	//managing the increase decrease button function;
+	let decreaseButtons = document.querySelectorAll('.decrease');
+	let increaseButtons = document.querySelectorAll('.increase');
+	let currentQuantity = 0
+	
+	for (let i=0;i<decreaseButtons.length;i++){
+		decreaseButtons[i].addEventListener('click',function(){
+			currentQuantity = decreaseButtons[i].parentElement.querySelector('span').textContent;
+			currentProduct = decreaseButtons[i].parentElement.previousElementSibling.previousElementSibling.textContent.trim().replace(/ /g,"" );
+			console.log(currentProduct);
+			$.ajax({
+               type: "POST",
+               url: "/decrease", 
+               data: {
+                  key: currentProduct,
+               },
+               
+               dataType: 'json',
+               success: function(data) {
+                  //success condition code
+               },
+               error: function() {
+                  //error condition code
+               }     
+        });
+setTimeout(function() {
+		location.reload();
+	},200);
+
+
+		})
+	}
+
+	for (let i=0;i<increaseButtons.length;i++){
+		increaseButtons[i].addEventListener('click',function(){
+			currentQuantity = increaseButtons[i].parentElement.querySelector('span').textContent;
+			currentProduct = increaseButtons[i].parentElement.previousElementSibling.previousElementSibling.textContent.trim().replace(/ /g,"" );
+			console.log(currentProduct);
+			$.ajax({
+               type: "POST",
+               url: "/increase", 
+               data: {
+                  key: currentProduct,
+               },
+               
+               dataType: 'json',
+               success: function(data) {
+                  //success condition code
+               },
+               error: function() {
+                  //error condition code
+               }     
+        });
+setTimeout(function() {
+		location.reload();
+	},200);
+
+
+		})
+	}
+
+</script>
+</body>
+</html>
+</head>
+<body>
