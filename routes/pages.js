@@ -7,8 +7,8 @@ var nodemailer = require('nodemailer');
 let mailTransporter = nodemailer.createTransport({ 
     service: 'gmail', 
     auth: { 
-        user: 'swapniltiwari087@gmail.com', 
-        pass: 'psxhwhjsfqpwzibe'
+        user: process.env.n_u, 
+        pass: process.env.n_p
     } 
 }); 
 const db = mysql.createConnection({
